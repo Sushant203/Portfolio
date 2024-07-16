@@ -39,7 +39,7 @@ const Navbar = () => {
           {NavItem.map((val) => (
             <div
               key={val.id}
-              className="text-white cursor-pointer hover:border-b-2 px-2"
+              className="text-white cursor-pointer hover:border-b-2 px-2 bg-slate-800"
             >
               {val.name}
             </div>
