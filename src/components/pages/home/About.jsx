@@ -12,7 +12,20 @@ const About = () => {
             illum facilis. Dolore! Lorem, ipsum dolor sit amet consectetur
             adipisicing elit. Omnis, fugiat nulla ut maxime fuga animi minus
             facere vitae dolore, repellendus quaerat ducimus similique
-            voluptates doloribus magni. Hic nihil dolorum commodi.
+            voluptates doloribus magni. Hic nihil dolorum commodi. Lorem ipsum
+            dolor sit amet consectetur adipisicing elit. Excepturi rem aliquid
+            repudiandae doloribus nulla incidunt blanditiis hic porro tempora
+            accusantium saepe, ex quam labore, debitis sunt culpa illum facilis.
+            Dolore! Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+            Omnis, fugiat nulla ut maxime fuga animi minus facere vitae dolore,
+            repellendus quaerat ducimus similique voluptates doloribus magni.
+            Hic nihil dolorum commodi. Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Excepturi rem aliquid repudiandae doloribus nulla
+            incidunt blanditiis hic porro tempora accusantium saepe, ex quam
+            labore, debitis sunt culpa illum facilis. Dolore! Lorem, ipsum dolor
+            sit amet consectetur adipisicing elit. Omnis, fugiat nulla ut maxime
+            fuga animi minus facere vitae dolore, repellendus quaerat ducimus
+            similique voluptates doloribus magni. Hic nihil dolorum commodi.
           </p>
         </article>
         <img
