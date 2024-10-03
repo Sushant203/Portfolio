@@ -8,9 +8,6 @@ function App() {
     <>
       <div className="">
         <Layout />
-        {/* <Navbar />
-        </Layout> */}
-        {/* <Navbar /> */}
       </div>
     </>
   );
