@@ -4,11 +4,18 @@ import mypic from "../../assets/mypic.jpg";
 import About from "./home/About";
 import Projects from "./home/Projects";
 
+import { motion } from "motion/react";
+
 const Homepage = () => {
   return (
     <main className="flex flex-col">
       {/* Hero section */}
-      <div className="bg-primary w-full py-8">
+      <motion.div
+        initial={false}
+        translate=""
+        transition={{ duration: 3 }}
+        className="bg-primary w-full py-8"
+      >
         <div className="flex flex-col md:flex-row justify-center gap-8 mx-auto items-center">
           <div className="flex flex-col space-y-4 text-left">
             <h1 className="text-6xl text-third font-bold">I&apos;m Sushant</h1>
@@ -36,7 +43,7 @@ const Homepage = () => {
             className="rounded-md shadow-lg shadow-slate-300"
           />
         </div>
-      </div>
+      </motion.div>
       {/* Hero section ends */}
 
       <section className="bg-secondary flex flex-col py-3 gap-2">
