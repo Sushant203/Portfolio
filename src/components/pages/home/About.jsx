@@ -1,42 +1,20 @@
-import logo from "../../../assets/logo.jpg";
 const About = () => {
   return (
-    <section className=" py-10 bg-primary">
-      <div className="flex  gap-6 justify-between px-5 max-w-full">
-        <article className=" w-fit">
-          <h1 className="text-3xl font-bold text-third">Code &amp; Coffee</h1>
-          <p className="text-md text-slate-300 leading-4 py-5 text-justify my-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
-            rem aliquid repudiandae doloribus nulla incidunt blanditiis hic
-            porro tempora accusantium saepe, ex quam labore, debitis sunt culpa
-            illum facilis. Dolore! Lorem, ipsum dolor sit amet consectetur
-            adipisicing elit. Omnis, fugiat nulla ut maxime fuga animi minus
-            facere vitae dolore, repellendus quaerat ducimus similique
-            voluptates doloribus magni. Hic nihil dolorum commodi. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit. Excepturi rem aliquid
-            repudiandae doloribus nulla incidunt blanditiis hic porro tempora
-            accusantium saepe, ex quam labore, debitis sunt culpa illum facilis.
-            Dolore! Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Omnis, fugiat nulla ut maxime fuga animi minus facere vitae dolore,
-            repellendus quaerat ducimus similique voluptates doloribus magni.
-            Hic nihil dolorum commodi. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Excepturi rem aliquid repudiandae doloribus nulla
-            incidunt blanditiis hic porro tempora accusantium saepe, ex quam
-            labore, debitis sunt culpa illum facilis. Dolore! Lorem, ipsum dolor
-            sit amet consectetur adipisicing elit. Omnis, fugiat nulla ut maxime
-            fuga animi minus facere vitae dolore, repellendus quaerat ducimus
-            similique voluptates doloribus magni. Hic nihil dolorum commodi.
+    <section
+      id="about"
+      className="py-20 bg-gradient-to-b from-purple-50 to-white dark:from-purple-900/50 dark:to-gray-900"
+    >
+      <div className="max-w-4xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-8 text-purple-800 dark:text-purple-400">
+          About Me
+        </h2>
+        <div className="prose lg:prose-lg mx-auto dark:prose-invert">
+          <p className="text-gray-700 dark:text-gray-300">
+            Hello! I&apos;m Sushant, a passionate software developer with a keen
+            eye for design and user experience. I specialize in building modern
+            web applications that are both beautiful and functional.
           </p>
-        </article>
-        <img
-          src={logo}
-          alt="alt..."
-          height={350}
-          width={250}
-          className="float-right mx-auto"
-        />
-        {/* <div>
-        </div> */}
+        </div>
       </div>
     </section>
   );
