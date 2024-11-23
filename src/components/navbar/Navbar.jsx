@@ -26,7 +26,7 @@ export default function Navbar() {
               to="/"
               className="text-2xl font-bold text-purple-600 dark:text-purple-400"
             >
-              Sushant Shrestha.
+             &lt;Sushant Shrestha/&gt;
             </Link>
           </div>
 
