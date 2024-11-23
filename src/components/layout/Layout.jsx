@@ -4,10 +4,11 @@ import About from "../pages/home/About";
 import Hero from "../pages/home/Hero";
 import Projects from "../pages/home/Projects";
 import { ThemeProvider } from "../context/ThemeContext";
-
+import Loader from '../layout/loader/Loader';
 function App() {
   return (
-    <Router>
+   <Loader >
+     <Router>
       <ThemeProvider>
         <div className="min-h-screen bg-white dark:bg-gray-900">
           <Navbar />
@@ -111,6 +112,7 @@ function App() {
         </div>
       </ThemeProvider>
     </Router>
+   </Loader>
   );
 }
 
