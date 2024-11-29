@@ -2,10 +2,10 @@ const About = () => {
   return (
     <section
       id="about"
-      className="py-20 bg-gradient-to-b from-purple-50 to-white dark:from-purple-900/50 dark:to-gray-900"
+      className="py-20 bg-gradient-to-b from-gray-200 to-gray-100 dark:from-gray-800 dark:to-gray-900"
     >
       <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-purple-800 dark:text-purple-400">
+        <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
           About Me
         </h2>
         <div className="prose lg:prose-lg mx-auto dark:prose-invert">
