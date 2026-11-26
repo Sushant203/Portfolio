@@ -154,7 +154,29 @@ export default function Navbar() {
                   <a
                     key={item.name}
                     href={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={(event) => {
+                      // Take full control of the navigation: the default
+                      // anchor jump can be cancelled while the menu exit
+                      // animation and scroll-lock teardown are in flight.
+                      event.preventDefault();
+                      // Release the scroll lock before scrolling.
+                      document.body.style.overflow = "";
+                      setIsOpen(false);
+                      // Wait for the menu exit animation (0.25s) to finish
+                      // before starting the smooth scroll — programmatic
+                      // smooth scrolls started during the exit animation
+                      // are dropped by the browser.
+                      const MENU_EXIT_MS = 300;
+                      window.setTimeout(() => {
+                        document
+                          .getElementById(item.href.slice(1))
+                          ?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start",
+                          });
+                      }, MENU_EXIT_MS);
+                      window.history.pushState(null, "", item.href);
+                    }}
                     className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
                       activeSection === item.href.slice(1)
                         ? "bg-violet-100 text-violet-800 dark:bg-violet-500/10 dark:text-violet-300"
