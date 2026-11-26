@@ -1,7 +1,38 @@
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { IoMdClose } from "react-icons/io";
 import { FaRobot } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
+
+const botResponses = {
+  hello: "Hi there! How can I assist you today?",
+  hi: "Hello! What can I help you with?",
+  "who are you": "I'm a chatbot assistant for Sushant's portfolio website.",
+  "what can you do":
+    "I can tell you about Sushant's skills, projects, and how to get in touch with him.",
+  contact:
+    "You can reach Sushant through the Contact section on this page, or via GitHub and LinkedIn.",
+  projects:
+    "Sushant has worked on projects like an Online Cab Booking System. Check out the Projects section above!",
+  skills:
+    "Sushant is proficient in React.js, JavaScript, HTML/CSS, and Figma design.",
+  experience:
+    "Sushant works as a software developer at Gaadi Nepal, with experience across web development and design.",
+  open:
+    "Sushant is currently open to work opportunities — feel free to reach out via the Contact section!",
+  default:
+    "I'm not sure about that. Would you like to know about Sushant's projects, skills, or how to contact him?",
+};
+
+const getBotResponse = (userMessage) => {
+  const message = userMessage.toLowerCase();
+  for (const [key, value] of Object.entries(botResponses)) {
+    if (message.includes(key)) {
+      return value;
+    }
+  }
+  return botResponses.default;
+};
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,128 +44,152 @@ const Chatbot = () => {
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const inputRef = useRef(null);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // "block: nearest" keeps scrolling inside the chat panel instead of
+    // jumping the whole page.
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+    });
+  }, [messages, isOpen]);
 
-  const botResponses = {
-    "hello": "Hi there! How can I assist you today?",
-    "hi": "Hello! What can I help you with?",
-    "who are you": "I'm a chatbot assistant for Sushant's portfolio website.",
-    "what can you do": "I can provide information about Sushant's skills, projects, and help you navigate the website.",
-    "contact": "You can contact Sushant through the contact form above or via email.",
-    "projects": "Sushant has worked on various projects including web development and design. Check out the projects section above!",
-    "skills": "Sushant is proficient in React.js, JavaScript, HTML/CSS, and various other web technologies.",
-    "experience": "Sushant has experience in web development and design, working on various projects.",
-    "default": "I'm not sure about that. Would you like to know about Sushant's projects, skills, or how to contact him?"
-  };
+  useEffect(() => {
+    if (isOpen) inputRef.current?.focus();
+  }, [isOpen]);
 
-  const getBotResponse = (userMessage) => {
-    const message = userMessage.toLowerCase();
-    for (const [key, value] of Object.entries(botResponses)) {
-      if (message.includes(key)) {
-        return value;
-      }
-    }
-    return botResponses.default;
-  };
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (!inputMessage.trim()) return;
 
-    // Add user message
-    const newMessages = [
-      ...messages,
-      { type: "user", content: inputMessage },
-    ];
+    const newMessages = [...messages, { type: "user", content: inputMessage }];
     setMessages(newMessages);
+    const currentInput = inputMessage;
     setInputMessage("");
 
-    // Add bot response with a slight delay
     setTimeout(() => {
       setMessages([
         ...newMessages,
-        { type: "bot", content: getBotResponse(inputMessage) },
+        { type: "bot", content: getBotResponse(currentInput) },
       ]);
     }, 500);
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="bg-gray-900 text-white p-4 rounded-full shadow-lg hover:bg-gray-800 transition-all duration-200"
-        >
-          <FaRobot className="text-2xl" />
-        </button>
-      )}
-
-      {isOpen && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-80 md:w-96 h-[500px] flex flex-col">
-          {/* Chat Header */}
-          <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
-            <div className="flex items-center gap-2">
-              <FaRobot className="text-xl text-gray-700 dark:text-gray-300" />
-              <h3 className="font-semibold text-gray-800 dark:text-white">Chat Assistant</h3>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
-            >
-              <IoMdClose className="text-xl" />
-            </button>
-          </div>
-
-          {/* Chat Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`flex ${
-                  message.type === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`max-w-[80%] rounded-lg p-3 ${
-                    message.type === "user"
-                      ? "bg-gray-900 text-white"
-                      : "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-white"
-                  }`}
-                >
-                  {message.content}
-                </div>
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="flex h-[min(30rem,70vh)] w-[min(22rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-xl dark:border-zinc-800 dark:bg-zinc-900"
+            role="dialog"
+            aria-label="Chat assistant"
+          >
+            {/* Chat header */}
+            <div className="flex items-center justify-between border-b border-zinc-200 p-4 dark:border-zinc-800">
+              <div className="flex items-center gap-2">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-100 text-violet-600 dark:bg-violet-500/10 dark:text-violet-400">
+                  <FaRobot className="h-4 w-4" />
+                </span>
+                <h3 className="font-display text-sm font-semibold">
+                  Chat Assistant
+                </h3>
               </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Chat Input */}
-          <form onSubmit={handleSubmit} className="p-4 border-t dark:border-gray-700">
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 p-2 border dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 dark:bg-gray-700 dark:text-white"
-              />
               <button
-                type="submit"
-                className="bg-gray-900 text-white p-2 rounded-lg hover:bg-gray-800 transition-colors"
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="rounded-md p-1.5 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+                aria-label="Close chat"
               >
-                <IoSend className="text-xl" />
+                <IoMdClose className="h-5 w-5" />
               </button>
             </div>
-          </form>
-        </div>
-      )}
+
+            {/* Messages */}
+            <div className="flex-1 space-y-3 overflow-y-auto p-4">
+              {messages.map((message, index) => (
+                <motion.div
+                  key={`${index}-${message.content.slice(0, 8)}`}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className={`flex ${
+                    message.type === "user" ? "justify-end" : "justify-start"
+                  }`}
+                >
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                      message.type === "user"
+                        ? "rounded-br-md bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
+                        : "rounded-bl-md bg-zinc-100 text-zinc-800 dark:bg-zinc-800 dark:text-zinc-100"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </motion.div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input */}
+            <form onSubmit={handleSubmit} className="border-t border-zinc-200 p-3 dark:border-zinc-800">
+              <div className="flex gap-2">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={inputMessage}
+                  onChange={(event) => setInputMessage(event.target.value)}
+                  placeholder="Type your message..."
+                  aria-label="Chat message"
+                  className="flex-1 rounded-lg border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none transition-colors placeholder:text-zinc-400 focus:border-violet-500 dark:border-zinc-700 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+                />
+                <motion.button
+                  type="submit"
+                  whileTap={{ scale: 0.9 }}
+                  className="rounded-lg bg-zinc-900 p-2.5 text-white transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  aria-label="Send message"
+                >
+                  <IoSend className="h-4 w-4" />
+                </motion.button>
+              </div>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* The floating button is hidden while the panel is open — the panel
+          has its own close control, plus Escape. */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.92 }}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-white shadow-lg transition-colors hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+            aria-label="Open chat assistant"
+          >
+            <FaRobot className="h-5 w-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

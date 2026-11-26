@@ -1,31 +1,34 @@
-import { IoLogoJavascript } from "react-icons/io";
-import { IoLogoFigma, IoLogoReact } from "react-icons/io5";
 import { AiFillHtml5 } from "react-icons/ai";
+import { IoLogoFigma, IoLogoReact } from "react-icons/io5";
+import { IoLogoJavascript } from "react-icons/io";
+
 export const TechData = [
   {
-    icons: <AiFillHtml5 className="text-[#E34F26]" />,
+    id: 1,
+    icon: <AiFillHtml5 className="h-7 w-7 text-[#E34F26]" />,
     label: "HTML & CSS",
     description:
-      "proficient in HTML and CSS, crafting exciting and interactice visual to attract and make your website appealing to user.",
+      "Semantic markup and modern CSS for clean, responsive layouts.",
   },
   {
-    icons: <IoLogoJavascript className=" border-none bg-[#F7DF1E]" />,
-    label: "Javascript",
+    id: 2,
+    icon: <IoLogoJavascript className="h-7 w-7 text-[#F7DF1E]" />,
+    label: "JavaScript",
     description:
-      "proficient in HTML and CSS, crafting exciting and interactice visual to attract and make your website appealing to user.",
+      "Interactive, client-side experiences built with modern JavaScript.",
   },
   {
-    icons: <IoLogoReact className="text-[#61DAFB]" />,
+    id: 3,
+    icon: <IoLogoReact className="h-7 w-7 text-[#61DAFB]" />,
     label: "React.js",
     description:
-      "proficient in HTML and CSS, crafting exciting and interactice visual to attract and make your website appealing to user.jsguhghrproficient in HTML and CSS, crafting exciting and interactice visual to attract and make your website appealing to user.jsguhghr",
+      "Component-driven user interfaces built with hooks and state.",
   },
   {
-    icons: <IoLogoFigma className="text-[#1ABCFE]" />,
-    label: "Figma Design",
+    id: 4,
+    icon: <IoLogoFigma className="h-7 w-7 text-[#1ABCFE]" />,
+    label: "Figma",
     description:
-      "proficient in HTML and CSS, crafting exciting and interactice visual to attract and make your website appealing to user.",
+      "Wireframes and polished interface designs before any code is written.",
   },
 ];
-
-// export default TechData;
