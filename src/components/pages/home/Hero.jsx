@@ -1,54 +1,118 @@
+import { motion } from "motion/react";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import mypic from "../../../assets/mypic.jpg";
 
-const Hero = () => {
-  return (
-    <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-        <div className="text-center md:text-left md:w-1/2">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-            Sushant Shrestha
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8">
-            Software Developer & Designer
-          </p>
-          <div className="flex flex-wrap justify-center md:justify-start gap-4">
-            <a
-              href="#contact"
-              className="bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition"
-            >
-              Contact Me
-            </a>
-            <a
-              href="#projects"
-              className="bg-transparent text-gray-900 dark:text-white px-6 py-3 rounded-lg border-2 border-gray-900 dark:border-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition"
-            >
-              View Projects
-            </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="bg-gray-700 text-white dark:bg-gray-300 dark:text-gray-900 px-6 py-3 rounded-lg hover:bg-gray-600 dark:hover:bg-gray-400 transition flex items-center gap-2"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-              Download Resume
-            </a>
-          </div>
-        </div>
-        <div className="mt-8 md:mt-0 md:w-1/2 flex justify-center">
-          <div className="relative w-64 h-64 md:w-80 md:h-80">
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-600 dark:from-gray-600 dark:to-gray-800 rounded-full filter blur-xl opacity-50 animate-blob"></div>
-            <img
-              src={mypic}
-              alt="Sushant Shrestha"
-              className="relative w-full h-full object-cover rounded-full border-2 border-gray-300 dark:border-gray-600"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.08 * i, duration: 0.5, ease: "easeOut" },
+  }),
 };
+
+const Hero = () => (
+  <section id="top" className="flex min-h-screen items-center">
+    <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-24 sm:px-6 md:grid-cols-[1.2fr_1fr] md:py-28">
+      <div>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+          className="mb-4 font-display text-sm font-medium uppercase tracking-[0.3em] text-violet-600 dark:text-violet-400"
+        >
+          Full Stack Developer
+        </motion.p>
+
+        <motion.h1
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={1}
+          className="font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl"
+        >
+          Sushant Shrestha
+        </motion.h1>
+
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={2}
+          className="mt-6 max-w-xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg"
+        >
+          I design and build clean, functional web applications — from
+          pixel-perfect interfaces to the code that powers them. Based in
+          Kathmandu, Nepal.
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={3}
+          className="mt-8 flex flex-wrap items-center gap-3"
+        >
+          <a
+            href="#projects"
+            className="rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            className="rounded-lg border border-zinc-300 px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white dark:border-zinc-700 dark:hover:border-white dark:hover:bg-white dark:hover:text-zinc-900"
+          >
+            Get in Touch
+          </a>
+
+          <div className="flex items-center gap-1">
+            <a
+              href="https://github.com/Sushant203"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub profile"
+              className="rounded-full p-2 text-zinc-600 transition-colors hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+            >
+              <FaGithub className="h-5 w-5" />
+            </a>
+            <a
+              href="https://np.linkedin.com/in/sushant-shrestha-78b85a279"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn profile"
+              className="rounded-full p-2 text-zinc-600 transition-colors hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
+            >
+              <FaLinkedin className="h-5 w-5" />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.15, duration: 0.6, ease: "easeOut" }}
+        className="mx-auto w-full max-w-sm md:justify-self-end"
+      >
+        <div className="relative">
+          <div
+            aria-hidden="true"
+            className="absolute -inset-3 rounded-3xl border border-violet-300 dark:border-violet-500/40"
+          />
+          <img
+            src={mypic}
+            alt="Portrait of Sushant Shrestha"
+            width={480}
+            height={600}
+            loading="eager"
+            className="aspect-[4/5] w-full rounded-2xl object-cover"
+          />
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
 
 export default Hero;
