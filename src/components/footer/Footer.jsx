@@ -1,45 +1,42 @@
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
+
+const socials = [
+  {
+    name: "GitHub",
+    href: "https://github.com/Sushant203",
+    icon: FaGithub,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://np.linkedin.com/in/sushant-shrestha-78b85a279",
+    icon: FaLinkedin,
+  },
+];
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-900 py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center space-y-4">
-          {/* Social Links */}
-          <div className="flex space-x-6">
+    <footer className="border-t border-zinc-200 dark:border-zinc-800">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-8 sm:px-6">
+        <div className="flex items-center gap-2">
+          {socials.map(({ name, href, icon: Icon }) => (
             <a
-              href="https://github.com/yourusername"
+              key={name}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              aria-label={`${name} profile`}
+              className="rounded-full p-2 text-zinc-600 transition-colors hover:bg-zinc-200 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white"
             >
-              <FaGithub className="text-2xl" />
+              <Icon className="h-5 w-5" />
             </a>
-            <a
-              href="https://linkedin.com/in/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              <FaLinkedin className="text-2xl" />
-            </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
-              <FaTwitter className="text-2xl" />
-            </a>
-          </div>
-
-          {/* Copyright */}
-          <div className="text-gray-600 dark:text-gray-400 text-sm">
-            © {currentYear} Sushant Shrestha. All rights reserved.
-          </div>
+          ))}
         </div>
+        <p className="text-xs text-zinc-500">
+          © {currentYear} Sushant Shrestha. Built with React, Vite & Tailwind
+          CSS.
+        </p>
       </div>
     </footer>
   );
