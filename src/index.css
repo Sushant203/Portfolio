@@ -1,35 +1,36 @@
 @tailwind base;
-@layer base {
-    h1 {
-        @apply text-2xl;
-    }
-
-    h2 {
-        @apply text-xl;
-    }
-
-    h3 {
-        @apply text-lg;
-    }
-}
 @tailwind components;
 @tailwind utilities;
 
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
+@layer base {
+  html {
+    scroll-padding-top: 5rem; /* keep anchor targets clear of the fixed navbar */
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
+
+  body {
+    @apply bg-zinc-50 text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
+    text-rendering: optimizeLegibility;
   }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+
+  ::selection {
+    @apply bg-violet-200 text-violet-950 dark:bg-violet-400 dark:text-zinc-950;
   }
-  100% {
-    transform: translate(0px, 0px) scale(1);
+
+  :focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-violet-500 ring-offset-2 ring-offset-zinc-50 dark:ring-offset-zinc-950;
   }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

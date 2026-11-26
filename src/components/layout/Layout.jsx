@@ -1,31 +1,32 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import Navbar from "../navbar/Navbar";
-import About from "../pages/home/About";
-import Hero from "../pages/home/Hero";
-import Projects from "../pages/home/Projects";
+import { MotionConfig } from "motion/react";
 import { ThemeProvider } from "../context/ThemeContext";
-import Loader from '../layout/loader/Loader';
-import Chatbot from "../chatbot/Chatbot";
+import Navbar from "../navbar/Navbar";
+import Hero from "../pages/home/Hero";
+import About from "../pages/home/About";
+import Skills from "../pages/home/Skills";
+import Projects from "../pages/home/Projects";
+import Contact from "../pages/home/Contact";
 import Footer from "../footer/Footer";
+import Chatbot from "../chatbot/Chatbot";
 
 function App() {
   return (
-   <Loader >
-     <Router>
-      <ThemeProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+    <ThemeProvider>
+      <MotionConfig reducedMotion="user">
+        <div className="min-h-screen bg-zinc-50 text-zinc-900 transition-colors duration-300 dark:bg-zinc-950 dark:text-zinc-100">
           <Navbar />
-          <main className="flex-grow">
+          <main>
             <Hero />
             <About />
+            <Skills />
             <Projects />
+            <Contact />
           </main>
           <Footer />
           <Chatbot />
         </div>
-      </ThemeProvider>
-    </Router>
-   </Loader>
+      </MotionConfig>
+    </ThemeProvider>
   );
 }
 
